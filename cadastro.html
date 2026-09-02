@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Formulario de cadastro de colaboradores da Rede Esperanca Viva."
+    />
+    <title>Cadastro | Rede Esperanca Viva</title>
+    <link rel="stylesheet" href="site.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="container nav" aria-label="Navegacao principal">
+        <a class="brand" href="index.html">Rede Esperanca Viva</a>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="cadastro.html">Cadastro</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <span class="eyebrow">Cadastro de colaboradores</span>
+          <h1>Preencha seus dados para participar.</h1>
+          <p>O formulario usa validacoes nativas e mascaras rigorosas para CPF, telefone e CEP.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container form-layout">
+          <aside class="panel" aria-labelledby="orientacoes">
+            <h2 id="orientacoes">Orientacoes</h2>
+            <p>Confira seus dados antes de enviar. Entraremos em contato para combinar a melhor forma de participacao.</p>
+          </aside>
+
+          <form class="form" id="cadastro-form">
+            <div class="field full">
+              <label for="nome">Nome completo</label>
+              <input id="nome" name="nome" type="text" minlength="3" required placeholder="Maria Oliveira" />
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" required placeholder="maria@email.com" />
+            </div>
+            <div class="field">
+              <label for="cpf">CPF</label>
+              <input id="cpf" name="cpf" type="text" inputmode="numeric" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00" />
+              <small id="cpf-error"></small>
+            </div>
+            <div class="field">
+              <label for="telefone">Telefone</label>
+              <input id="telefone" name="telefone" type="tel" inputmode="tel" required pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(11) 90000-0000" />
+            </div>
+            <div class="field">
+              <label for="cep">CEP</label>
+              <input id="cep" name="cep" type="text" inputmode="numeric" required pattern="\d{5}-\d{3}" placeholder="00000-000" />
+            </div>
+            <div class="field">
+              <label for="interesse">Area de interesse</label>
+              <select id="interesse" name="interesse" required>
+                <option value="">Selecione</option>
+                <option>Alimentacao</option>
+                <option>Educacao</option>
+                <option>Acolhimento</option>
+                <option>Meio ambiente</option>
+              </select>
+            </div>
+            <fieldset class="field">
+              <legend>Disponibilidade</legend>
+              <label class="option"><input type="radio" name="disponibilidade" required /> Dias de semana</label>
+              <label class="option"><input type="radio" name="disponibilidade" required /> Fins de semana</label>
+            </fieldset>
+            <label class="terms full">
+              <input type="checkbox" required />
+              Autorizo contato para fins de voluntariado.
+            </label>
+            <button class="button primary full" type="submit">Enviar cadastro</button>
+            <p class="success full" id="success" role="status" hidden>Cadastro recebido com sucesso.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Rede Esperanca Viva - solidariedade com transparencia.</p>
+      </div>
+    </footer>
+  </body>
+</html>
