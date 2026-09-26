@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Rede Esperanca Viva',
+  title: 'Salvadores dos Animais',
   description:
-    'Portal semantico para apresentar projetos sociais e cadastrar colaboradores com validacoes e mascaras de entrada.',
+    'Portal de protecao animal para apresentar projetos e cadastrar colaboradores com validacoes e mascaras de entrada.',
 };
 
 export default function RootLayout({
@@ -33,9 +33,9 @@ export default function RootLayout({
         {children}
         <footer className="site-footer">
           <div className="container">
-            <p>Rede Esperanca Viva - solidariedade organizada com transparencia.</p>
-            <a href="mailto:contato@redeesperancaviva.org">
-              contato@redeesperancaviva.org
+            <p>Salvadores dos Animais - protecao animal com transparencia.</p>
+            <a href="mailto:contato@salvadoresdosanimais.org">
+              contato@salvadoresdosanimais.org
             </a>
           </div>
         </footer>
