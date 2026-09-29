@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ArrowRight, HeartHandshake, House, PawPrint, Stethoscope } from 'lucide-react';
 
 const projects = [
@@ -52,10 +51,10 @@ export default function ProjetosPage() {
                 <span>{project.tag}</span>
                 <h2>{project.title}</h2>
                 <p>{project.text}</p>
-                <Link className="card-link" href="/cadastro">
+                <a className="card-link" href="/cadastro">
                   Quero ajudar
                   <ArrowRight aria-hidden="true" size={16} />
-                </Link>
+                </a>
               </article>
             );
           })}
@@ -71,10 +70,10 @@ export default function ProjetosPage() {
               forma de participacao.
             </p>
           </div>
-          <Link className="button primary" href="/cadastro">
+          <a className="button primary" href="/cadastro">
             Iniciar cadastro
             <ArrowRight aria-hidden="true" size={18} />
-          </Link>
+          </a>
         </div>
       </section>
     </main>

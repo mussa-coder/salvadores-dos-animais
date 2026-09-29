@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { ArrowRight, HandHeart, Leaf, ShieldCheck, Users } from 'lucide-react';
 
 const impactItems = [
@@ -20,13 +19,13 @@ export default function Home() {
               acolhimento e adocao responsavel de animais em situacao de risco.
             </p>
             <div className="hero-actions" aria-label="Acoes principais">
-              <Link className="button primary" href="/cadastro">
+              <a className="button primary" href="/cadastro">
                 Quero colaborar
                 <ArrowRight aria-hidden="true" size={18} />
-              </Link>
-              <Link className="button secondary" href="/projetos">
+              </a>
+              <a className="button secondary" href="/projetos">
                 Ver projetos
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -85,9 +84,9 @@ export default function Home() {
               doador ou divulgador das campanhas de adocao.
             </p>
           </div>
-          <Link className="button primary" href="/cadastro">
+          <a className="button primary" href="/cadastro">
             Cadastrar agora
-          </Link>
+          </a>
         </div>
       </section>
     </main>

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { HandHeart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
@@ -19,10 +18,10 @@ export function Header() {
   return (
     <header className="site-header">
       <nav className="container nav" aria-label="Navegacao principal">
-        <Link className="brand" href="/" onClick={() => setMenuOpen(false)}>
+        <a className="brand" href="/" onClick={() => setMenuOpen(false)}>
           <HandHeart aria-hidden="true" />
           <span>Salvadores dos Animais</span>
-        </Link>
+        </a>
         <button
           aria-controls="primary-navigation"
           aria-expanded={menuOpen}
@@ -36,13 +35,13 @@ export function Header() {
         <ul className={menuOpen ? 'is-open' : undefined} id="primary-navigation">
           {navItems.map((item) => (
             <li key={item.href}>
-              <Link
+              <a
                 aria-current={pathname === item.href ? 'page' : undefined}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
