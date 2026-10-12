@@ -1,78 +1,44 @@
 'use client';
 
-import { FormEvent, useMemo, useRef, useState } from 'react';
+import { type SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { CheckCircle2, Send } from 'lucide-react';
-
-type FormState = {
-  nome: string;
-  email: string;
-  cpf: string;
-  telefone: string;
-  cep: string;
-  interesse: string;
-  disponibilidade: string;
-  termos: boolean;
-};
-
-const initialState: FormState = {
-  nome: '',
-  email: '',
-  cpf: '',
-  telefone: '',
-  cep: '',
-  interesse: '',
-  disponibilidade: '',
-  termos: false,
-};
-
-const onlyDigits = (value: string) => value.replace(/\D/g, '');
-
-function maskCpf(value: string) {
-  return onlyDigits(value)
-    .slice(0, 11)
-    .replace(/(\d{3})(\d)/, '$1.$2')
-    .replace(/(\d{3})(\d)/, '$1.$2')
-    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-}
-
-function maskPhone(value: string) {
-  const digits = onlyDigits(value).slice(0, 11);
-  if (digits.length <= 10) {
-    return digits
-      .replace(/(\d{2})(\d)/, '($1) $2')
-      .replace(/(\d{4})(\d)/, '$1-$2');
-  }
-  return digits
-    .replace(/(\d{2})(\d)/, '($1) $2')
-    .replace(/(\d{5})(\d)/, '$1-$2');
-}
-
-function maskCep(value: string) {
-  return onlyDigits(value).slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
-}
-
-function isValidCpf(value: string) {
-  const cpf = onlyDigits(value);
-  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
-
-  const calcDigit = (base: string, factor: number) => {
-    const total = base
-      .split('')
-      .reduce((sum, digit) => sum + Number(digit) * factor--, 0);
-    const rest = (total * 10) % 11;
-    return rest === 10 ? 0 : rest;
-  };
-
-  return (
-    calcDigit(cpf.slice(0, 9), 10) === Number(cpf[9]) &&
-    calcDigit(cpf.slice(0, 10), 11) === Number(cpf[10])
-  );
-}
+import {
+  type FormState,
+  initialFormState,
+  isValidCpf,
+  maskCep,
+  maskCpf,
+  maskPhone,
+} from './form-model';
+import {
+  loadFormWithStoredPreferences,
+  saveVolunteerPreferences,
+} from './preferences-storage';
 
 export function CadastroForm() {
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState(initialFormState);
   const [sent, setSent] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
   const cpfInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const loadTimer = window.setTimeout(() => {
+      setForm(loadFormWithStoredPreferences());
+      setStorageReady(true);
+    }, 0);
+
+    return () => window.clearTimeout(loadTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!storageReady) return;
+
+    const preferences = {
+      interesse: form.interesse,
+      disponibilidade: form.disponibilidade,
+    };
+    saveVolunteerPreferences(preferences);
+  }, [form.disponibilidade, form.interesse, storageReady]);
 
   const cpfError = useMemo(
     () => form.cpf.length === 14 && !isValidCpf(form.cpf),
@@ -85,7 +51,7 @@ export function CadastroForm() {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     const formElement = event.currentTarget;
 
@@ -99,7 +65,11 @@ export function CadastroForm() {
     }
 
     setSent(true);
-    setForm(initialState);
+    setForm({
+      ...initialFormState,
+      interesse: form.interesse,
+      disponibilidade: form.disponibilidade,
+    });
   }
 
   return (
@@ -134,6 +104,7 @@ export function CadastroForm() {
       <div className="field">
         <label htmlFor="cpf">CPF</label>
         <input
+          aria-describedby={cpfError ? 'cpf-error' : undefined}
           aria-invalid={cpfError}
           id="cpf"
           inputMode="numeric"
@@ -146,7 +117,7 @@ export function CadastroForm() {
           value={form.cpf}
           onChange={(event) => update('cpf', maskCpf(event.target.value))}
         />
-        {cpfError ? <small>Informe um CPF valido.</small> : null}
+        {cpfError ? <small id="cpf-error">Informe um CPF valido.</small> : null}
       </div>
 
       <div className="field">
@@ -189,10 +160,10 @@ export function CadastroForm() {
           onChange={(event) => update('interesse', event.target.value)}
         >
           <option value="">Selecione</option>
-          <option value="alimentacao">Alimentacao</option>
-          <option value="educacao">Educacao</option>
-          <option value="acolhimento">Acolhimento</option>
-          <option value="meio-ambiente">Meio ambiente</option>
+          <option value="resgate">Resgate animal</option>
+          <option value="lar-temporario">Lar temporario</option>
+          <option value="transporte">Transporte de animais</option>
+          <option value="divulgacao">Divulgacao e adocao</option>
         </select>
       </div>
 
@@ -229,7 +200,7 @@ export function CadastroForm() {
           type="checkbox"
           onChange={(event) => update('termos', event.target.checked)}
         />
-        Autorizo o contato da Rede Esperanca Viva para fins de voluntariado.
+        Autorizo o contato da Salvadores dos Animais para fins de voluntariado.
       </label>
 
       <button className="button primary full" type="submit">
@@ -238,10 +209,10 @@ export function CadastroForm() {
       </button>
 
       {sent ? (
-        <p className="success full" role="status">
+        <output className="success full">
           <CheckCircle2 aria-hidden="true" size={18} />
-          Cadastro recebido. Obrigado por se aproximar da rede.
-        </p>
+          Cadastro recebido. Obrigado por apoiar a protecao animal.
+        </output>
       ) : null}
     </form>
   );

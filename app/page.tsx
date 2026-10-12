@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import { ArrowRight, HandHeart, Leaf, ShieldCheck, Users } from 'lucide-react';
 
 const impactItems = [
-  { value: '4.280', label: 'cestas e kits entregues' },
-  { value: '860', label: 'familias acompanhadas' },
-  { value: '320', label: 'voluntarios ativos' },
+  { value: '428', label: 'animais resgatados' },
+  { value: '186', label: 'adocoes responsaveis' },
+  { value: '72', label: 'voluntarios ativos' },
 ];
 
 export default function Home() {
@@ -13,20 +12,20 @@ export default function Home() {
       <section className="hero-section">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <span className="eyebrow">Rede Esperanca Viva</span>
-            <h1>Conectando voluntarios, doacoes e projetos que chegam a quem precisa.</h1>
+            <span className="eyebrow">Salvadores dos Animais</span>
+            <h1>Conectando voluntarios, doacoes e adotantes para salvar vidas.</h1>
             <p>
-              Uma organizacao sem fins lucrativos dedicada a fortalecer comunidades
-              vulneraveis com alimentacao, educacao, cuidado ambiental e apoio humano.
+              Uma organizacao sem fins lucrativos dedicada ao resgate, tratamento,
+              acolhimento e adocao responsavel de animais em situacao de risco.
             </p>
             <div className="hero-actions" aria-label="Acoes principais">
-              <Link className="button primary" href="/cadastro">
+              <a className="button primary" href="/cadastro">
                 Quero colaborar
                 <ArrowRight aria-hidden="true" size={18} />
-              </Link>
-              <Link className="button secondary" href="/projetos">
+              </a>
+              <a className="button secondary" href="/projetos">
                 Ver projetos
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -48,11 +47,11 @@ export default function Home() {
         <div className="container split">
           <article>
             <span className="eyebrow">Sobre a iniciativa</span>
-            <h2>Transparencia, presenca local e trabalho continuado.</h2>
+            <h2>Transparencia, cuidado responsavel e trabalho continuado.</h2>
             <p>
-              A Rede Esperanca Viva organiza frentes de voluntariado com parceiros
-              comunitarios, escolas, cozinhas solidarias e liderancas de bairro. Cada
-              acao e planejada para gerar continuidade, nao apenas atendimento pontual.
+              A Salvadores dos Animais organiza frentes de voluntariado com protetores,
+              clinicas veterinarias, lares temporarios e parceiros locais. Cada resgate
+              recebe acompanhamento ate a recuperacao e a adocao responsavel.
             </p>
           </article>
           <div className="feature-list" aria-label="Principios da organizacao">
@@ -69,7 +68,7 @@ export default function Home() {
             <div>
               <Leaf aria-hidden="true" />
               <h3>Sustentabilidade</h3>
-              <p>Projetos sociais que tambem cuidam do territorio onde acontecem.</p>
+              <p>Acoes de castracao, conscientizacao e adocao que previnem o abandono.</p>
             </div>
           </div>
         </div>
@@ -79,15 +78,15 @@ export default function Home() {
         <div className="container callout">
           <HandHeart aria-hidden="true" />
           <div>
-            <h2>Seu tempo pode virar alimento, reforco escolar ou acolhimento.</h2>
+            <h2>Seu tempo pode virar resgate, tratamento ou um novo lar.</h2>
             <p>
-              Preencha o cadastro para participar como voluntario, apoiador recorrente
-              ou articulador de doacoes na sua regiao.
+              Preencha o cadastro para participar como voluntario, lar temporario,
+              doador ou divulgador das campanhas de adocao.
             </p>
           </div>
-          <Link className="button primary" href="/cadastro">
+          <a className="button primary" href="/cadastro">
             Cadastrar agora
-          </Link>
+          </a>
         </div>
       </section>
     </main>

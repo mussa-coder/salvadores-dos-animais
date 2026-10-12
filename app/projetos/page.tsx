@@ -1,30 +1,29 @@
-import Link from 'next/link';
-import { ArrowRight, BookOpen, CookingPot, HeartPulse, Sprout } from 'lucide-react';
+import { ArrowRight, HeartHandshake, House, PawPrint, Stethoscope } from 'lucide-react';
 
 const projects = [
   {
-    icon: CookingPot,
-    title: 'Mesa Aberta',
-    tag: 'Seguranca alimentar',
-    text: 'Distribuicao semanal de refeicoes, cestas basicas e kits de higiene com triagem comunitaria.',
+    icon: PawPrint,
+    title: 'Resgate Seguro',
+    tag: 'Resgate animal',
+    text: 'Atendimento de animais abandonados ou em situacao de risco, com transporte e avaliacao inicial.',
   },
   {
-    icon: BookOpen,
-    title: 'Trilha do Saber',
-    tag: 'Educacao',
-    text: 'Reforco escolar, rodas de leitura e mentoria para adolescentes em escolas publicas parceiras.',
+    icon: Stethoscope,
+    title: 'Cuidado Veterinario',
+    tag: 'Saude animal',
+    text: 'Consultas, vacinacao, castracao e tratamento para os animais resgatados.',
   },
   {
-    icon: HeartPulse,
-    title: 'Cuidado Presente',
+    icon: House,
+    title: 'Lar Temporario',
     tag: 'Acolhimento',
-    text: 'Escuta qualificada, orientacao social e encaminhamento para redes locais de saude e assistencia.',
+    text: 'Acolhimento familiar durante a recuperacao e a espera por uma adocao responsavel.',
   },
   {
-    icon: Sprout,
-    title: 'Horta de Bairro',
-    tag: 'Meio ambiente',
-    text: 'Hortas urbanas mantidas por moradores, voluntarios e escolas para promover autonomia alimentar.',
+    icon: HeartHandshake,
+    title: 'Novo Lar',
+    tag: 'Adocao responsavel',
+    text: 'Divulgacao, triagem e acompanhamento de familias interessadas em adotar.',
   },
 ];
 
@@ -33,10 +32,10 @@ export default function ProjetosPage() {
     <main>
       <section className="page-hero compact">
         <div className="container">
-          <span className="eyebrow">Iniciativas solidarias</span>
-          <h1>Projetos com metas claras, equipes locais e acompanhamento continuo.</h1>
+          <span className="eyebrow">Iniciativas de protecao animal</span>
+          <h1>Projetos que unem resgate, cuidado e adocao responsavel.</h1>
           <p>
-            Cada frente recebe voluntarios de acordo com disponibilidade, habilidades
+            Cada frente recebe voluntarios de acordo com disponibilidade, experiencia
             e proximidade geografica.
           </p>
         </div>
@@ -52,6 +51,10 @@ export default function ProjetosPage() {
                 <span>{project.tag}</span>
                 <h2>{project.title}</h2>
                 <p>{project.text}</p>
+                <a className="card-link" href="/cadastro">
+                  Quero ajudar
+                  <ArrowRight aria-hidden="true" size={16} />
+                </a>
               </article>
             );
           })}
@@ -67,10 +70,10 @@ export default function ProjetosPage() {
               forma de participacao.
             </p>
           </div>
-          <Link className="button primary" href="/cadastro">
+          <a className="button primary" href="/cadastro">
             Iniciar cadastro
             <ArrowRight aria-hidden="true" size={18} />
-          </Link>
+          </a>
         </div>
       </section>
     </main>
